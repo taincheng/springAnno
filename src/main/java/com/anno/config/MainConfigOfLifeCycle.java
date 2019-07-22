@@ -18,8 +18,11 @@ import org.springframework.context.annotation.Scope;
  *      @Scope("prototype")
  *      多实例：没错请求对象的时候就创建一个新的对象。
  *
+ *postProcessBeforeInitialization
  * 初始化：
  *      对象创建完成，并赋值好，调用初始化方法。。。
+ *postProcessAfterInitialization
+ *
  * 销毁：
  *      单实例：容器关闭的时候
  *      多实例：容器不会管理这种bean的销毁
@@ -38,6 +41,17 @@ import org.springframework.context.annotation.Scope;
  *      在bean初始化前后进行一些处理工作：
  *      postProcessBeforeInitialization ： 在初始化之前工作
  *      postProcessAfterInitialization ： 在初始化之后工作
+ *
+ *   BeanPostProcessor的原理：
+ *      populateBean(beanName, mbd, instanceWrapper);//给对象属性赋值，在初始化之前
+ * {
+ *      1.遍历得到容器中所有的BeanPostProcessor，
+ *      2.然后挨个执行 postProcessBeforeInitialization(result, beanName);
+ *      3.若迭代无下一个，直接返回result，也就是对象。
+ *      applyBeanPostProcessorsBeforeInitialization(bean, beanName);//初始化之前
+ *      invokeInitMethods(beanName, wrappedBean, mbd);//执行初始化
+ *      applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);//初始化化之后
+ * }
  *
  */
 
