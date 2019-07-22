@@ -53,6 +53,19 @@ import org.springframework.context.annotation.Scope;
  *      applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);//初始化化之后
  * }
  *
+ * Spring 对 BeanPostProcessor的底层实现
+ *      BeanPostProcessor 在其中做了很多的事情。
+ *      列举一些：
+ *          1. ApplicationContextAwareProcessor
+ *              为组件注入IOC容器。
+ *          2.BeanValidationPostProcessor
+ *              数据校验（？）
+ *          3.InitDestroyAnnotationBeanPostProcessor
+ *              setInitAnnotationType 实现 javax.annotation.PostConstruct 即@PostConstruct
+ *              setDestroyAnnotationType 实现 javax.annotation.PreDestroy 即@PreDestroy
+ *          4.AutowiredAnnotationBeanPostProcessor
+ *              对@Autowired注解的支持
+ *          还有许多功能的实现，待发掘
  */
 
 @ComponentScan(value = "com.anno.beans")
