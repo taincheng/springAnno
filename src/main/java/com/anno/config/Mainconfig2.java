@@ -4,13 +4,14 @@ import com.anno.beans.blue;
 import com.anno.beans.red;
 import com.anno.beans.student;
 import com.anno.condition.LinusCondition;
+import com.anno.condition.MyImportBeanDefinitionRegistrar;
 import com.anno.condition.MyImportSeletor;
 import com.anno.condition.WindowsCondition;
 import org.springframework.context.annotation.*;
 
 //@Conditional(WindowsCondition.class)  //只有满足该条件，该类的所有bean才能被创建。
 @Configuration
-@Import({red.class, blue.class, MyImportSeletor.class})
+@Import({red.class, blue.class, MyImportSeletor.class, MyImportBeanDefinitionRegistrar.class})
 public class Mainconfig2 {
 
     //默认是单实例
@@ -55,5 +56,6 @@ public class Mainconfig2 {
      * 3.@Import[快速给容器中导入一个组件]
      *       1.@Import(要导入到容器中的组件)：容器中就会自动注册这个组件，id默认是全类名。
      *       2.ImportSelector:返回需要导入的组件的全类名数组。
+     *       3.ImportBeanDefinitionRegistrar:手动注册bean到容器中
      */
 }
