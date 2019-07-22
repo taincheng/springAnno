@@ -54,6 +54,11 @@ public class Test01 {
     @Test
     public void testImport() {
         printBeans(ac);
+
+        Object bean = ac.getBean("ColorFactoryBean");
+        Object bean1 = ac.getBean("ColorFactoryBean");
+        System.out.println(bean + " " + bean1);
+        System.out.println(bean == bean1);
     }
 
     private void printBeans(ApplicationContext ac) {

@@ -1,5 +1,6 @@
 package com.anno.config;
 
+import com.anno.beans.ColorFactoryBean;
 import com.anno.beans.blue;
 import com.anno.beans.red;
 import com.anno.beans.student;
@@ -57,5 +58,15 @@ public class Mainconfig2 {
      *       1.@Import(要导入到容器中的组件)：容器中就会自动注册这个组件，id默认是全类名。
      *       2.ImportSelector:返回需要导入的组件的全类名数组。
      *       3.ImportBeanDefinitionRegistrar:手动注册bean到容器中
+     * 4.使用Spring提供的FactoryBean（工厂bean） 用的地方特别多，尤其是和其他框架整合的时候
+     *       1.默认获取到的是工厂bean调用getObjct创建的对象。
+     *       2.要获取工厂Bean本身，我们需要给id前面加个“&”，
+     *              &ColorFactoryBean
      */
+    @Bean("ColorFactoryBean")
+    public ColorFactoryBean colorFactoryBean(){
+        return new ColorFactoryBean();
+    }
+
+
 }

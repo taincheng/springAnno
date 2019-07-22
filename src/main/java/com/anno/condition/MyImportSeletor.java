@@ -10,7 +10,6 @@ public class MyImportSeletor implements ImportSelector{
     //AnnotationMetadata：当前标注@Import注解的类的所有注解信息
     @Override
     public String[] selectImports(AnnotationMetadata annotationMetadata) {
-
         return new String[]{"com.anno.beans.black","com.anno.beans.yellow"};
     }
 }
