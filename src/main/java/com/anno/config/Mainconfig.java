@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 //@ComponentScan(value = "com.anno")
 //@ComponentScan(value = "com.anno",excludeFilters = {
 //        @ComponentScan.Filter(type = FilterType.ANNOTATION,
-//        classes = {Controller.class, Service.class})
+//                classes = {Controller.class, Service.class})
 //})
 //@ComponentScan(value = "com.anno",includeFilters = {
 //        @ComponentScan.Filter(type = FilterType.ANNOTATION,
