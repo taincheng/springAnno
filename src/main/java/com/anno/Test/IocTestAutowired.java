@@ -1,5 +1,7 @@
 package com.anno.Test;
 
+import com.anno.beans.Boss;
+import com.anno.beans.car;
 import com.anno.config.MainConfigOfAutowired;
 import com.anno.dao.studentDao;
 import com.anno.service.studentService;
@@ -21,5 +23,14 @@ public class IocTestAutowired {
 
         System.out.println(bean);
 
+    }
+
+    @Test
+    public void test02(){
+        Boss boss = (Boss)ac.getBean("Boss");
+        System.out.println(boss);
+
+        car car = ac.getBean(car.class);
+        System.out.println(car);
     }
 }

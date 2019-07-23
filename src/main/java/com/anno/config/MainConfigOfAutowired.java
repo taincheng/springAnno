@@ -4,6 +4,7 @@ import com.anno.controller.MyBeanPostProcessor;
 import com.anno.dao.studentDao;
 import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.stereotype.Component;
 
 /**
  * 自动装配；
@@ -28,6 +29,10 @@ import org.springframework.context.annotation.FilterType;
  *      @Inject:
  *          需要导入javax.inject的依赖包。和Autowired一样，但是也没有required的控制功能。
  *
+ * 3.@Autowired: 构造器，参数，方法，属性 ：都是从IOC容器中获取参数组件的值
+ *      1.标注在方法位置，@Bean + 方法参数：参数从容器中获取。默认可以不写，一样的效果。
+ *      2.标注在构造器上：如果组件只有一个有参构造器，这个有参构造器的@Autowired可以省略
+ *      3.放在参数位置。
  *
  */
 @Configuration
@@ -36,6 +41,7 @@ import org.springframework.context.annotation.FilterType;
 @ComponentScan(value = "com.anno.dao")
 @ComponentScan(value = "com.anno.service")
 @ComponentScan(value = "com.anno.controller")
+@ComponentScan(value = "com.anno.beans")
 public class MainConfigOfAutowired {
 
     @Primary
