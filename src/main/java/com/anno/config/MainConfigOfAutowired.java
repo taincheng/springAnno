@@ -33,6 +33,11 @@ import org.springframework.stereotype.Component;
  *      1.标注在方法位置，@Bean + 方法参数：参数从容器中获取。默认可以不写，一样的效果。
  *      2.标注在构造器上：如果组件只有一个有参构造器，这个有参构造器的@Autowired可以省略
  *      3.放在参数位置。
+ *4.自定义组件想要使用Spring容器底层的一些组件，（ApplicationContext，BeanFactory，等）
+ *      自定义组件实现xxxAware，便有实现的方法来注入对应的组件:
+ *          在创建对象的时候会调用接口的方法注入相关组件：那些接口都实现了Aware接口；
+ *      把Spring底层 的一些组件注入到自定义的Bean中：
+ *          XXXAware：功能的实现都是在xxxProcessor中。
  *
  */
 @Configuration
