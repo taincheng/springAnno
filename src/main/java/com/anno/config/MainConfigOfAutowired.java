@@ -21,6 +21,14 @@ import org.springframework.context.annotation.FilterType;
  *          可以使用@Autowired(required=false);
  *      5.@Primary: 让Spring进行自动装配的时候，默认使用首选的bean。
  *          也可以继续指定@Qualifier,这里只是指定自动装配，不是指getBean里面的
+ * 2.Spring 还支持使用@Resource(JSR250)和@Inject(JSR330)[java 规范的注解]
+ *      @Resource：
+ *          可以和@Autowired一样实现自动装配。默认属性名装配，可设置名字
+ *          没有能支持@Primary功能，没有支持和@Autowired(required = false)一样的功能
+ *      @Inject:
+ *          需要导入javax.inject的依赖包。和Autowired一样，但是也没有required的控制功能。
+ *
+ *
  */
 @Configuration
 //@ComponentScan(value = {"com.anno.controller","com.anno.dao","com.anno.service"})
