@@ -32,6 +32,40 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  *      1.将业务逻辑组件和切面类都加入到容器中；告诉Spring哪个是切面类（@Aspect）
  *      2.在切面类上的每一个通知方法上标注通知注解，告诉Spring何时何地运行（切入点表达式）
  *      3.开启基于注解的AOP模式。
+ *
+ *  AOP原理：【看给容器中注册了什么组件，这个组件什么时候工作，这个组件的功能是什么？】
+ *         @EnableAspectJAutoProxy：
+ *  1、@EnableAspectJAutoProxy 是什么？
+ *          @Import(AspectJAutoProxyRegistrar.class) ，给容器导入AspectJAutoProxyRegistrar
+ *              利用AspectJAutoProxyRegistrar自定义给容器中注册bean：
+ *          internalAutoProxyCreator = AnnotationAwareAspectJAutoProxyCreator
+ *        给容器中注册一个AnnotationAwareAspectJAutoProxyCreator；
+ *
+ *  2.AnnotationAwareAspectJAutoProxyCreator：功能是什么？
+ *          继承自 -> AspectJAwareAdvisorAutoProxyCreator
+ *                  -> AbstractAdvisorAutoProxyCreator
+ *                    -> AbstractAutoProxyCreator
+ *                          implements SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware
+ *                      管理后置处理器（在bean初始化完成前后做事情）、自动装配BeanFactory
+ *      AbstractAutoProxyCreator.setBeanFactory()
+ *      AbstractAutoProxyCreator.有后置处理器的逻辑
+ *
+ *      AbstractAdvisorAutoProxyCreator 重写了 setBeanFactory
+ *      AbstractAdvisorAutoProxyCreator.initBeanFactory()
+ *
+ *      AnnotationAwareAspectJAutoProxyCreator.initBeanFactory
+ *
+ *    ==流程==
+ *      1.传入配置类，创建IOC容器
+ *      2.注册配置类，调用refresh() 刷新容器；
+ *      3.registerBeanPostProcessors(beanFactory);注册bean的后置处理器来方便拦截bean的创建。
+ *              1.先获取IOC容器已经定义了的需要创建对象的所有BeanPostProcessor
+ *              2.给容器中加别的BeanPostProcessor
+ *              3.优先注册实现了PriorityOrdered接口的BeanPostProcessors。
+ *              4.在给容器中注册实现了Ordered接口的BeanPostProcessor。
+ *              5.注册没实现优先级接口的BeanPostProcessors；
+ *              6.注册BeanPostProcessors，实际上就是创建BeanPostProcessors对象，保存在容器中。
+ *
  */
 
 @EnableAspectJAutoProxy
